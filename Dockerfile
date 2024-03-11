@@ -1,5 +1,5 @@
-FROM adoptopenjdk/openjdk11:alpine
-RUN ./gradlew build
-ARG JAR_FILE=gradle/wrapper/gradle-wrapper.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+FROM openjdk:11-jdk
+LABEL maintainer="email"
+ARG JAR_FILE=build/libs/docker-0.0.1-SNAPSHOT.jar
+ADD ${JAR_FILE} docker-springboot.jar
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/docker-springboot.jar"]
