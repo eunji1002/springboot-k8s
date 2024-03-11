@@ -1,4 +1,7 @@
-FROM adoptopenjdk/openjdk11:alpine
-ARG JAR_FILE_PATH=target/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/docker-springboot.jar"]
+FROM openjdk:21-jdk
+
+WORKDIR /usr/src/app
+
+COPY ./build/libs/first-example-0.0.1-SNAPSHOT.jar ./build/libs/first-example-0.0.1-SNAPSHOT.jar
+
+CMD ["java","-jar","./build/libs/first-example-0.0.1-SNAPSHOT.jar"]
