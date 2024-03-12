@@ -1,29 +1,33 @@
 pipeline {
     agent any
+
     environment {
-         TAG = "${new java.text.SimpleDateFormat('yyyy-MM-dd_HH-mm-ss').format(new Date())}"
+        DOCKER_HUB_CREDENTIAL = credentials('eunjing')
+        DOCKER_REGISTRY = 'docker.io'
+        IMAGE_NAME = 'eunjing/eunji'
+        DOCKER_REGISTRY_USERNAME = 'eunjing'
     }
+
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
-        stage('Build') {
+
+        stage('Build and Push Docker Image') {
             steps {
                 script {
-                    // Docker 이미지 빌드
-                    app = docker.build("eunjing/eunji:${env.BUILD_NUMBER}", ".")
-                }
-            }
-        }
-        stage('Push') {
-            steps {
-                script {
-                    // Docker Hub에 로그인 후 이미지 푸시
-                    docker.withRegistry('https://registry.hub.docker.com', 'eunjing') {
-                        app.push("${TAG}")
-                        app.push("latest")
+                    withCredentials([string(credentialsId: 'eunjing', variable: 'DOCKER_HUB_CREDENTIAL')]) {
+
+                        sh "echo $DOCKER_HUB_CREDENTIAL | docker login -u $DOCKER_REGISTRY_USERNAME --password-stdin $DOCKER_REGISTRY"
+
+
+                        sh "docker build -t $DOCKER_REGISTRY/$IMAGE_NAME ."
+                        sh "docker push $DOCKER_REGISTRY/$IMAGE_NAME"
+
+                        
+                        sh "docker logout $DOCKER_REGISTRY"
                     }
                 }
             }
