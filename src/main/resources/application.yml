@@ -16,7 +16,7 @@ spring:
     endpoints:
       web:
         exposure:
-          include: health, info, prometheus
+          include: "*"
 
 
 

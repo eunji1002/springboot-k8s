@@ -8,7 +8,7 @@ COPY . .
 RUN ./gradlew clean build --no-daemon
 
 # Running
-FROM openjdk:21-jdk
+FROM azul/zulu-openjdk-alpine:21
 
 WORKDIR /usr/src/app
 
