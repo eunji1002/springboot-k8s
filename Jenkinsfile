@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     // Docker Hub에 로그인 후 이미지 푸시
-                    docker.withRegistry('https://registry.hub.docker.com', 'label') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'eunjing') {
                         app.push("${TAG}")
                         app.push("latest")
                     }
