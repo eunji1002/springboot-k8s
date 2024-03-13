@@ -17,6 +17,9 @@ spring:
       web:
         exposure:
           include: "*"
+    endpoint:
+      metrics:
+        enabled: true
 
 
 
