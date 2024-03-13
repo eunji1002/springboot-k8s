@@ -12,14 +12,12 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  management:
-    endpoints:
-      web:
-        exposure:
-          include: "*"
-    endpoint:
-      metrics:
-        enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+
 
 
 
