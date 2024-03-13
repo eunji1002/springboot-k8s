@@ -6,7 +6,7 @@
 [![Jenkins](https://img.shields.io/badge/Jenkins-Automation-pink.svg)](https://jenkins.io/)
 [![Prometheus](https://img.shields.io/badge/Prometheus-Monitoring-yellow.svg)](https://prometheus.io/)
 
-이 간단한 Spring Boot 애플리케이션은 MySQL 데이터베이스와 연동하여 Sample 데이터베이스의 'todo' 테이블을 출력합니다. 뿐만 아니라, Actuator와 Prometheus를 활용하여 모니터링 기능을 제공합니다.
+이 Spring Boot 애플리케이션은 MySQL 데이터베이스와 연동하여 Sample 데이터베이스의 'todo' 테이블을 출력합니다. 뿐만 아니라, Actuator와 Prometheus를 활용하여 모니터링 기능을 제공합니다.
 
 이 프로젝트는 Jenkinsfile을 활용하여 CI/CD를 구축했습니다. Jenkins를 통해 빌드, 테스트, 그리고 배포가 자동화되었으며, ArgoCD를 이용하여 Kubernetes 클러스터에 애플리케이션을 자동으로 배포합니다.
 ## 인프라 구성도
@@ -74,8 +74,9 @@ CMD ["java","-jar","./first-example-0.0.1-SNAPSHOT.jar"]
 ## Jenkinsfile
 이 파이프라인은 다음과 같은 단계로 구성됩니다:
 
-Checkout: 소스 코드를 가져옵니다.
-Build and Push Docker Image: Docker 이미지를 빌드하고 Docker Hub에 푸시합니다.
+1. Checkout: 소스 코드를 가져옵니다.
+2. Build and Push Docker Image: Docker 이미지를 빌드하고 Docker Hub에 푸시합니다.
+
 파이프라인은 Jenkins의 파이프라인 기능을 사용하여 정의되었으며, Docker Hub에 이미지를 푸시하기 위해 보안 자격 증명을 사용합니다.
 ```bash
 pipeline {
