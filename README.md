@@ -115,7 +115,7 @@ pipeline {
     }
 }
 ```
-## 앱 미리보기
+##
 <p>
   <img src="/src/5.png" width="1000" alt="get">
   <img src="/src/6.png" width="1000" alt="jenkins">
